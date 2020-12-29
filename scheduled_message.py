@@ -51,8 +51,8 @@ if __name__ == "__main__":
     SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
     slack_client = WebClient(SLACK_BOT_TOKEN)
 
-    remind_me()
-    post_file(slack_client)
+    # remind_me()
+    # post_file(slack_client)
 
     schedule.every().sunday.at("19:00").do(lambda: remind_me())
     schedule.every().sunday.at("20:00").do(lambda: post_file(slack_client))
