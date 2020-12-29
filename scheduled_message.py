@@ -1,6 +1,7 @@
 import schedule
 import time
 import yagmail
+import os
 from datetime import date
 from slack.web.client import WebClient
 from slack.errors import SlackApiError
@@ -31,8 +32,7 @@ def post_file(slack_client):
         initial_comment="Hey all, <@alexcn711> submitted an FX iteration!",
         file=video_file)
     except SlackApiError as e:
-        logging.error("ERROR, request to Slack API Failed: {}.".format(e.response.status_code))
-        logging.error(e.response)
+        print("ERROR, request to Slack API Failed: ", e)
     video_file.close()
 
 def remind_me():
@@ -48,7 +48,7 @@ def remind_me():
 if __name__ == "__main__":
     print("Starting app...")
     # For a test workspace currently
-    SLACK_BOT_TOKEN = "xoxb-1625991589952-1602233224930-dVKmHENTskT4QKWt98kefJ1I"
+    SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
     slack_client = WebClient(SLACK_BOT_TOKEN)
 
     remind_me()
